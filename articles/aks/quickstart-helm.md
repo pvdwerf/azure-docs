@@ -90,6 +90,9 @@ git clone https://github.com/Azure-Samples/azure-voting-app-redis.git
 cd azure-voting-app-redis/azure-vote/
 ```
 
+## Attach the ACR to the AKS Cluster
+az aks update -n myAKSCluster -g myResourceGroup --attach-acr <acr-name>
+
 ## Build and push the sample application to the ACR
 
 Using the preceding Dockerfile, run the [az acr build][az-acr-build] command to build and push an image to the registry. The `.` at the end of the command provides the location of the source code directory path (in this case, the current directory). The `--file` parameter takes in the path of the Dockerfile relative to this source code directory path.
@@ -115,6 +118,7 @@ Update *azure-vote-front/Chart.yaml* to add a dependency for the *redis* chart f
 apiVersion: v2
 name: azure-vote-front
 description: A Helm chart for Kubernetes
+version: 0.1.0
 
 dependencies:
   - name: redis
